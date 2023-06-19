@@ -1,25 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const App = () => {
+  const arr=['cricket','football','basketball'];
+  const [hidden,sethidden]=useState(false)
+  const[data,setData]=useState(arr)
+  console.log(data);
+const deleteHandler=(value)=>
+{
+  const filtered_value = data.filter(datavalue=>datavalue!=value)
+  console.log(data)
+  setData(filtered_value)
+  
+}
+const hiddenHandler=()=>
+{
+  if(hidden==="none") sethidden("")
+  else sethidden("none")
 }
 
-export default App;
+  return (
+    <div>
+
+      <ul>
+      {
+        data.map((value,index)=>
+        
+          <ul key={index}>
+            <input type='checkbox' checked={false}  onchange={()=>hiddenHandler()} />
+            <li >{value}</li>
+            <button onClick={()=>deleteHandler(value)} style={{display:hidden}}>delete</button>
+          </ul>
+        )
+
+      }
+      </ul>
+    </div>
+  )
+}
+
+export default App
